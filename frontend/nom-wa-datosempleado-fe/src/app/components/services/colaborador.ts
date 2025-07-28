@@ -6,11 +6,11 @@ export interface Colaborador {
 idcolaborador: number;
 nombre: string;
 apellido: string;
-direccion: string;
+direccion?: string;
 edad: number;
-profesion: string;
-estado_civil: string;
-}
+profesion?: string;
+estado_civil?: string;
+} 
 
 @Injectable({
 providedIn: 'root'

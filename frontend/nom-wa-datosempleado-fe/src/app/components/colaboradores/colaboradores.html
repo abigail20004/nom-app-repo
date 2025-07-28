@@ -12,16 +12,71 @@
     <div class="formulario-agregar">
       <button class="cerrar" (click)="toggleFormulario()">✖</button>
 
-      <form (ngSubmit)="agregarColaborador()" #colForm="ngForm">
-        <input [(ngModel)]="nuevoColaborador.idcolaborador" name="idcolaborador" placeholder="ID" required>
-        <input [(ngModel)]="nuevoColaborador.nombre" name="nombre" placeholder="Nombre" required>
-        <input [(ngModel)]="nuevoColaborador.apellido" name="apellido" placeholder="Apellido" required>
-        <input [(ngModel)]="nuevoColaborador.direccion" name="direccion" placeholder="Dirección">
-        <input [(ngModel)]="nuevoColaborador.edad" name="edad" type="number" placeholder="Edad">
-        <input [(ngModel)]="nuevoColaborador.profesion" name="profesion" placeholder="Profesión">
-        <input [(ngModel)]="nuevoColaborador.estado_civil" name="estado_civil" placeholder="Estado civil">
-        <button type="submit">Guardar</button>
-      </form>
+   <form (ngSubmit)="agregarColaborador()" #colForm="ngForm">
+  <!-- Nombre -->
+  <input
+    [(ngModel)]="nuevoColaborador.nombre"
+    name="nombre"
+    placeholder="Nombre"
+    required
+    #nombre="ngModel"
+    [ngClass]="{ 'invalido': nombre.invalid && nombre.touched }"
+  />
+  <div *ngIf="nombre.invalid && nombre.touched" class="error">
+    El nombre es requerido.
+  </div>
+
+  <!-- Apellido -->
+  <input
+    [(ngModel)]="nuevoColaborador.apellido"
+    name="apellido"
+    placeholder="Apellido"
+    required
+    #apellido="ngModel"
+    [ngClass]="{ 'invalido': apellido.invalid && apellido.touched }"
+  />
+  <div *ngIf="apellido.invalid && apellido.touched" class="error">
+    El apellido es requerido.
+  </div>
+
+  <!-- Dirección -->
+  <input
+    [(ngModel)]="nuevoColaborador.direccion"
+    name="direccion"
+    placeholder="Dirección"
+  />
+
+  <!-- Edad -->
+  <input
+    [(ngModel)]="nuevoColaborador.edad"
+    name="edad"
+    type="number"
+    placeholder="Edad"
+    min="1"
+    #edad="ngModel"
+    [ngClass]="{ 'invalido': edad.invalid && edad.touched }"
+  />
+  <div *ngIf="edad.invalid && edad.touched" class="error">
+    Edad inválida (debe ser mayor a 0).
+  </div>
+
+  <!-- Profesión -->
+  <input
+    [(ngModel)]="nuevoColaborador.profesion"
+    name="profesion"
+    placeholder="Profesión"
+  />
+
+  <!-- Estado Civil -->
+  <input
+    [(ngModel)]="nuevoColaborador.estado_civil"
+    name="estado_civil"
+    placeholder="Estado civil"
+  />
+
+  <button type="submit" [disabled]="colForm.invalid">Guardar</button>
+</form>
+
     </div>
   </ng-container>
 

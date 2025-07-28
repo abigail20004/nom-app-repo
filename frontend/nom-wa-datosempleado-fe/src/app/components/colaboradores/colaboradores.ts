@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { ColaboradorService, Colaborador } from '../../services/colaborador';
+
+import { ColaboradorService, Colaborador } from '../services/colaborador';
 import { HttpClientModule } from '@angular/common/http';
 
 @Component({
