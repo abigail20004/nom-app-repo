@@ -1,23 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ColaboradoresComponent } from './colaboradores';
+describe('ColaboradoresComponent', () => {
+let component: ColaboradoresComponent;
+let fixture: ComponentFixture<ColaboradoresComponent>;
 
-import { Colaboradores } from './colaboradores';
+beforeEach(async () => {
+await TestBed.configureTestingModule({
+imports: [ColaboradoresComponent]
+}).compileComponents();
 
-describe('Colaboradores', () => {
-  let component: Colaboradores;
-  let fixture: ComponentFixture<Colaboradores>;
+fixture = TestBed.createComponent(ColaboradoresComponent);
+component = fixture.componentInstance;
+fixture.detectChanges();
+});
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [Colaboradores]
-    })
-    .compileComponents();
-
-    fixture = TestBed.createComponent(Colaboradores);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
-
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+it('should create', () => {
+expect(component).toBeTruthy();
+});
 });

@@ -1,9 +1,31 @@
 <div class="container">
-  <h2>Colaboradores</h2>
-  <button (click)="cargarColaboradores()">Cargar colaboradores</button>
+  <h2>Aplicación de Gestión de Colaboradores</h2>
 
-  <div *ngIf="cargando">Cargando...</div>
+  <div class="botonera">
+    <button (click)="cargarColaboradores()">Cargar colaboradores</button>
+    <button (click)="toggleFormulario()">+</button>
+  </div>
 
+  <!-- Solo mostrar si está activo -->
+  <ng-container *ngIf="mostrarFormulario">
+
+    <div class="formulario-agregar">
+      <button class="cerrar" (click)="toggleFormulario()">✖</button>
+
+      <form (ngSubmit)="agregarColaborador()" #colForm="ngForm">
+        <input [(ngModel)]="nuevoColaborador.idcolaborador" name="idcolaborador" placeholder="ID" required>
+        <input [(ngModel)]="nuevoColaborador.nombre" name="nombre" placeholder="Nombre" required>
+        <input [(ngModel)]="nuevoColaborador.apellido" name="apellido" placeholder="Apellido" required>
+        <input [(ngModel)]="nuevoColaborador.direccion" name="direccion" placeholder="Dirección">
+        <input [(ngModel)]="nuevoColaborador.edad" name="edad" type="number" placeholder="Edad">
+        <input [(ngModel)]="nuevoColaborador.profesion" name="profesion" placeholder="Profesión">
+        <input [(ngModel)]="nuevoColaborador.estado_civil" name="estado_civil" placeholder="Estado civil">
+        <button type="submit">Guardar</button>
+      </form>
+    </div>
+  </ng-container>
+
+  <!-- Tabla -->
   <table *ngIf="colaboradores.length > 0" border="1" cellpadding="10" style="margin-top: 20px;">
     <thead>
       <tr>
@@ -24,7 +46,11 @@
         <td>{{ col.direccion }}</td>
         <td>{{ col.profesion }}</td>
         <td>{{ col.estado_civil }}</td>
-        <td> <button (click)="mostrarAlerta(nivelRiesgo(col.edad))">Nivel Riesgo</button> </td>
+        <td>
+          <button (click)="mostrarAlerta(nivelRiesgo(col.edad))">
+            Nivel Riesgo
+          </button>
+        </td>
       </tr>
     </tbody>
   </table>

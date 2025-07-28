@@ -1,13 +1,15 @@
 import { Component, signal } from '@angular/core';
-import { Colaboradores } from "./components/colaboradores/colaboradores";
 import { CommonModule } from '@angular/common';
+import { ColaboradoresComponent } from './components/colaboradores/colaboradores';
+import { HttpClientModule } from '@angular/common/http';
 
 @Component({
-  selector: 'app-root',
-  imports: [ CommonModule,Colaboradores],
-  templateUrl: './app.html',
-  styleUrl: './app.css'
+selector: 'app-root',
+standalone: true,
+imports: [CommonModule, ColaboradoresComponent, HttpClientModule],
+templateUrl: './app.html',
+styleUrls: ['./app.css'] // ✅ corregido (styleUrl → styleUrls)
 })
 export class App {
-  protected readonly title = signal('nom-wa-datosempleado-fe');
+protected readonly title = signal('nom-wa-datosempleado-fe');
 }

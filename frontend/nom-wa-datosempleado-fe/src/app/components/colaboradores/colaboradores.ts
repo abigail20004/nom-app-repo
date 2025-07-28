@@ -1,57 +1,75 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
-interface Colaborador {
-  id: number;
-  nombre: string;
-  apellido: string;
-  edad: number;
-  direccion: string;
-  profesion: string;
-  estado_civil: string;
-}
+import { FormsModule } from '@angular/forms';
+import { ColaboradorService, Colaborador } from '../../services/colaborador';
+import { HttpClientModule } from '@angular/common/http';
 
 @Component({
-  selector: 'app-colaboradores',
-  standalone: true,
-  imports: [CommonModule],
-  templateUrl: './colaboradores.html',
-  styleUrl: './colaboradores.css'
+selector: 'app-colaboradores',
+standalone: true,
+imports: [CommonModule, FormsModule, HttpClientModule],
+templateUrl: './colaboradores.html',
+styleUrls: ['./colaboradores.css']
 })
-export class Colaboradores {
-  colaboradores: Colaborador[] = [];
-  cargando = false;
+export class ColaboradoresComponent {
+colaboradores: Colaborador[] = [];
+cargando = false;
 
-  cargarColaboradores() {
-    this.cargando = true;
+nuevoColaborador: Colaborador = {
+idcolaborador: 0,
+nombre: '',
+apellido: '',
+direccion: '',
+edad: 0,
+profesion: '',
+estado_civil: ''
+};
 
-    setTimeout(() => {
-      this.colaboradores = [
-        {
-          id: 1,
-          nombre: 'Ana',
-          apellido: 'Gómez',
-          edad: 24,
-          direccion: 'Zona 1',
-          profesion: 'Ingeniera',
-          estado_civil: 'Soltera'
-        },
-        {
-          id: 2,
-          nombre: 'Luis',
-          apellido: 'Pérez',
-          edad: 45,
-          direccion: 'Zona 7',
-          profesion: 'Arquitecto',
-          estado_civil: 'Casado'
-        }
-      ];
-      this.cargando = false;
-    }, 1000);
-  }
+constructor(private colaboradorService: ColaboradorService) {}
 
-  nivelRiesgo(edad: number): string {
-    if (edad >= 18 && edad <= 25) return '🟢 FUERA DE PELIGRO';
+cargarColaboradores() {
+this.cargando = true;
+this.colaboradorService.getColaboradores().subscribe({
+next: (data) => {
+this.colaboradores = data;
+this.cargando = false;
+},
+error: () => {
+alert('Error al cargar colaboradores');
+this.cargando = false;
+}
+});
+}
+
+agregarColaborador() {
+this.colaboradorService.createColaborador(this.nuevoColaborador).subscribe({
+next: () => {
+alert('Colaborador creado exitosamente');
+this.nuevoColaborador = {
+idcolaborador: 0,
+nombre: '',
+apellido: '',
+direccion: '',
+edad: 0,
+profesion: '',
+estado_civil: ''
+};
+this.cargarColaboradores();
+},
+error: () => {
+alert('Error al crear colaborador');
+}
+});
+}
+
+mostrarFormulario: boolean = false;
+
+toggleFormulario() {
+  this.mostrarFormulario = !this.mostrarFormulario;
+}
+
+nivelRiesgo(edad: number): string {
+if (edad >= 18 && edad <= 25) return '🟢 FUERA DE PELIGRO';
 if (edad >= 26 && edad <= 50) return '🟠 TENGA CUIDADO';
 return '🔴 POR FAVOR QUEDARSE EN CASA';
 }
