@@ -1,128 +1,132 @@
-/* Contenedor principal */
-.container {
-  max-width: 800px;
-  margin: auto;
-  padding: 20px;
-  font-family: 'Arial', sans-serif;
+/* ======== TABLA ========= */
+.table th,
+.table td {
+  text-align: center;
+  vertical-align: middle;
+  font-size: 14px;
+  padding: 12px;
+  color: #ffffff; /* Texto blanco */
+  background-color: rgba(26, 46, 101, 0.9); /* Azul corporativo opaco */
 }
 
-/* Botonera */
-.botonera {
-  display: flex;
-  gap: 10px;
-  margin-bottom: 20px;
-  align-items: center;
+.table thead {
+  background-color: #1A2E65; 
+  color: #ffffff;
 }
 
-.botonera button {
-  background-color: #000;
-  color: #fff;
-  padding: 8px 16px;
-  font-weight: bold;
-  border-radius: 6px;
-  border: none;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-/* Estilo específico para botón "+" */
-.botonera button:last-child {
-  width: 40px;
-  height: 40px;
-  font-size: 15px;
-  line-height: 1;
-  border-radius: 50%;
-  box-shadow: 0 2px 6px rgba(194, 189, 189, 0.15);
-}
-
-/* Formulario flotante */
-.formulario-agregar {
+/* ======== FORMULARIO FLOTANTE (VENTANA) ======== */
+.formulario-flotante {
   position: fixed;
-  top: 50%;
+  top: 10%;
   left: 50%;
-  transform: translate(-50%, -50%);
-  background: rgba(255, 255, 255, 0.95);
-  padding: 35px 35px;
-  border-radius: 12px;
-  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
-  z-index: 1000;
-  width: 350px;
-  max-width: 850vw;
+  transform: translateX(-50%);
+  width: 90%;
+  max-width: 420px;
+  background: rgba(26, 46, 101, 0.454); /* Azul oscuro institucional */
+  backdrop-filter: blur(12px);
+  border-radius: 15px;
+  z-index: 1050;
+  color: #ffffff;
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.5);
+  padding: 25px 20px;
 }
 
-/* Inputs del formulario */
-.formulario-agregar input {
-  display: block;
-  width: 100%;
-  margin-bottom: 12px;
-  padding: 8px 12px;
-  font-size: 1rem;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  transition: border-color 0.3s ease;
+/* Botón de cerrar ✖ */
+.formulario-flotante .cerrar {
+  position: absolute;
+  top: 12px;
+  right: 15px;
+  background: none;
+  border: none;
+  font-size: 10 rem;
+  color: #ffffff;
+  cursor: pointer;
 }
 
-.formulario-agregar input:focus {
-  border-color: #3399ff;
-  outline: none;
-}
-
-input.invalido {
-  border-color: red;
-}
-
-/* Mensaje de error */
-.error {
-  color: red;
-  font-size: 0.8rem;
-  margin-top: -10px;
+/* ======== INPUTS ======== */
+.form-control {
+  background-color: rgba(255, 255, 255, 0.05);
+  color: #ffffff;
+  border: 1px solid #6c757d;
+  font-size: 13px;
+  padding: 10px 12px;
+  border-radius: 8px;
   margin-bottom: 10px;
 }
 
-/* Botón guardar */
-.formulario-agregar button[type="submit"] {
-  width: 100%;
-  padding: 10px 0;
-  font-size: 1.1rem;
-  background-color: #14314e;
-  border: none;
-  color: white;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+.form-control::placeholder {
+  color: rgba(255, 255, 255, 0.5);
 }
 
-.formulario-agregar button[type="submit"]:hover {
-  background-color: #1a73e8;
+.form-control:focus {
+  border-color: #4D5FA9;
+  box-shadow: 0 0 5px rgba(77, 95, 169, 0.7);
+  background-color: rgba(255, 255, 255, 0.07);
+  color: #fff;
 }
 
-/* Botón cerrar (✖) */
-.formulario-agregar .cerrar {
-  position: absolute;
-  top: 8px;
-  right: 12px;
-  background: transparent;
-  border: none;
-  font-size: 20px;
-  color: #333;
-  cursor: pointer;
+/* ======== VALIDACIONES ======== */
+.is-invalid {
+  border-color: #dc3545;
+}
+
+.invalid-feedback {
+  color: #ffc5c5;
+  font-size: 12px;
+}
+
+/* ======== BOTÓN GUARDAR ======== */
+button[type="submit"] {
+  background-color: #ffffff;
+  color: #1A2E65;
   font-weight: bold;
-}
-
-.formulario-agregar .cerrar:hover {
-  color: red;
-}
-
-/* Tabla de colaboradores */
-.tabla-colaboradores {
+  border: none;
+  border-radius: 8px;
+  padding: 10px;
   width: 100%;
-  border-collapse: collapse;
-  margin-top: 20px;
+  transition: all 0.3s ease;
 }
 
-.tabla-colaboradores th,
-.tabla-colaboradores td {
-  border: 1px solid #ccc;
-  padding: 8px;
-  text-align: center;
+button[type="submit"]:hover {
+  background-color: #e6e6e6;
+  color: #2c46a2;
+}
+
+/* ======== BOTONES DE ACCIÓN (Cargar/Nivel Riesgo) ======== */
+.btn-primary,
+.btn-success,
+.btn-warning {
+  font-weight: 600;
+  border-radius: 8px;
+}
+
+.btn-primary {
+  background-color: #1A2E65;
+  border-color: #1A2E65;
+}
+
+.btn-primary:hover {
+  background-color: #2c46a2;
+  border-color: #2c46a2;
+}
+
+.btn-success {
+  background-color: #4D5FA9;
+  border-color: #4D5FA9;
+}
+
+.btn-success:hover {
+  background-color: #3a4893;
+  border-color: #3a4893;
+}
+
+.btn-warning {
+  background-color: #ffffffe6;
+  color: #1A2E65;
+  font-weight: 600;
+  border: none;
+}
+
+.btn-warning:hover {
+  background-color: #e0b200;
 }

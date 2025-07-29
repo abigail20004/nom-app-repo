@@ -25,6 +25,7 @@ return this.http.get<Colaborador[]>('http://localhost:3000/colaboradores');
 }
 
 createColaborador(data: Colaborador): Observable<Colaborador> {
-return this.http.post<Colaborador>('http://localhost:3000/api/colaboradores', data);
+  return this.http.post<Colaborador>('http://localhost:3000/colaboradores', data);
 }
+
 }

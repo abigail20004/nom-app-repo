@@ -1,81 +1,82 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-
-import { ColaboradorService, Colaborador } from '../services/colaborador';
+import { ColaboradorService } from '../services/colaborador';
+import { Colaborador } from '../services/colaborador';
 import { HttpClientModule } from '@angular/common/http';
 
 @Component({
-selector: 'app-colaboradores',
-standalone: true,
-imports: [CommonModule, FormsModule, HttpClientModule],
-templateUrl: './colaboradores.html',
-styleUrls: ['./colaboradores.css']
+  selector: 'app-colaboradores',
+  standalone: true,
+  imports: [CommonModule, FormsModule, HttpClientModule],
+  templateUrl: './colaboradores.html',
+  styleUrls: ['./colaboradores.css']
 })
 export class ColaboradoresComponent {
-colaboradores: Colaborador[] = [];
-cargando = false;
+  colaboradores: Colaborador[] = [];
+  cargando = false;
 
-nuevoColaborador: Colaborador = {
-idcolaborador: 0,
-nombre: '',
-apellido: '',
-direccion: '',
-edad: 0,
-profesion: '',
-estado_civil: ''
-};
+  mostrarFormulario = false;
 
-constructor(private colaboradorService: ColaboradorService) {}
+  nuevoColaborador: Colaborador = {
+    idcolaborador: 0,
+    nombre: '',
+    apellido: '',
+    direccion: '',
+    edad: 0,
+    profesion: '',
+    estado_civil: ''
+  };
 
-cargarColaboradores() {
-this.cargando = true;
-this.colaboradorService.getColaboradores().subscribe({
-next: (data) => {
-this.colaboradores = data;
-this.cargando = false;
-},
-error: () => {
-alert('Error al cargar colaboradores');
-this.cargando = false;
-}
-});
-}
+  constructor(private colaboradorService: ColaboradorService) {}
 
-agregarColaborador() {
-this.colaboradorService.createColaborador(this.nuevoColaborador).subscribe({
-next: () => {
-alert('Colaborador creado exitosamente');
-this.nuevoColaborador = {
-idcolaborador: 0,
-nombre: '',
-apellido: '',
-direccion: '',
-edad: 0,
-profesion: '',
-estado_civil: ''
-};
-this.cargarColaboradores();
-},
-error: () => {
-alert('Error al crear colaborador');
-}
-});
-}
+  toggleFormulario() {
+    this.mostrarFormulario = !this.mostrarFormulario;
+  }
 
-mostrarFormulario: boolean = false;
+  cargarColaboradores() {
+    this.cargando = true;
+    this.colaboradorService.getColaboradores().subscribe({
+      next: (data) => {
+        this.colaboradores = data;
+        this.cargando = false;
+      },
+      error: () => {
+        alert('Error al cargar colaboradores');
+        this.cargando = false;
+      }
+    });
+  }
 
-toggleFormulario() {
-  this.mostrarFormulario = !this.mostrarFormulario;
-}
+  agregarColaborador() {
+    this.colaboradorService.createColaborador(this.nuevoColaborador).subscribe({
+      next: () => {
+        alert('Colaborador creado exitosamente');
+        this.nuevoColaborador = {
+          idcolaborador: 0,
+          nombre: '',
+          apellido: '',
+          direccion: '',
+          edad: 0,
+          profesion: '',
+          estado_civil: ''
+        };
+        this.mostrarFormulario = false;
+        this.cargarColaboradores();
+      },
+      error: () => {
+        alert('Error al crear colaborador');
+      }
+    });
+  }
 
-nivelRiesgo(edad: number): string {
-if (edad >= 18 && edad <= 25) return '🟢 FUERA DE PELIGRO';
-if (edad >= 26 && edad <= 50) return '🟠 TENGA CUIDADO';
-return '🔴 POR FAVOR QUEDARSE EN CASA';
-}
+  nivelRiesgo(edad: number): string {
+    if (edad >= 18 && edad <= 25) return '🟢 FUERA DE PELIGRO';
+    if (edad >= 26 && edad <= 50) return '🟠 TENGA CUIDADO';
+    return '🔴 POR FAVOR QUEDARSE EN CASA';
+  }
 
-mostrarAlerta(mensaje: string) {
-alert(mensaje);
-}
+  mostrarAlerta(mensaje: string) {
+    alert(mensaje);
+  }
 }

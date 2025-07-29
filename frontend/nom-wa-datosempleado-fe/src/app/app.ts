@@ -6,9 +6,9 @@ import { FormsModule } from '@angular/forms';
 @Component({
 selector: 'app-root',
 standalone: true,
-imports: [CommonModule, ColaboradoresComponent, HttpClientModule, FormsModule],
+imports: [CommonModule, ColaboradoresComponent, HttpClientModule,FormsModule],
 templateUrl: './app.html',
-styleUrls: ['./app.css'] // ✅ corregido (styleUrl → styleUrls)
+styleUrls: ['./app.css'] 
 })
 export class App {
 protected readonly title = signal('nom-wa-datosempleado-fe');
