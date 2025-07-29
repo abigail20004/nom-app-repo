@@ -21,13 +21,16 @@ app.get("/colaboradores", async (req, res) => {
 });
 
 // Ruta POST para crear un nuevo colaborador
-app.post("/api/colaboradores", async (req, res) => {
-  try {
-    const { idcolaborador, nombre, apellido, direccion, edad, profesion, estado_civil } = req.body;
+app.post("api/colaboradores", async (req, res) => {
+  const { nombre, apellido, direccion, edad, profesion, estado_civil } = req.body;
 
+  if (!nombre || !apellido || !direccion || !edad || !profesion || !estado_civil) {
+    return res.status(400).json({ error: "Todos los campos son obligatorios" });
+  }
+
+  try {
     const nuevo = await prisma.colaborador.create({
       data: {
-        idcolaborador,
         nombre,
         apellido,
         direccion,
@@ -36,13 +39,13 @@ app.post("/api/colaboradores", async (req, res) => {
         estado_civil,
       },
     });
-
     res.json(nuevo);
   } catch (error) {
-    res.status(500).json({ error: "Error al crear usuario", detalle: error.message });
+    console.error("Error al guardar:", error);
+    res.status(500).json({ error: "Error al guardar el colaborador" });
   }
 });
 
 app.listen(PORT, () => {
-  console.log(`Servidor backend escuchando en http://localhost:${PORT}`);
+  console.log(`Servidor backend escuchando en http://localhost:3000`);
 });

@@ -8,11 +8,11 @@ datasource db {
 }
 
 model colaborador {
-  idcolaborador Int @id @default(autoincrement())
+  idcolaborador  Int @id @default(autoincrement())
   nombre         String
   apellido       String
-  direccion      String
+  direccion      String?
   edad           Int
-  profesion      String
-  estado_civil   String
+  profesion      String?
+  estado_civil   String?
 }
