@@ -24,10 +24,10 @@ Abre tu navegador y navega a:
 http://localhost:4200
 
 # Descripción del Proyecto
-### Sistema de Gestión de Colaboradores – Cofiño Stahl
+### Sistema de Gestión de Colaboradores 
 
 
-Proyecto desarrollado como parte de una prueba técnica para Cofiño Stahl. Esta aplicación fullstack permite gestionar colaboradores a través de una API REST y una interfaz web moderna. Incluye funcionalidades de listado, validación, y registro de colaboradores.
+Esta aplicación fullstack permite gestionar colaboradores a través de una API REST y una interfaz web moderna. Incluye funcionalidades de listado, validación, y registro de colaboradores.
 Tecnologías:
 - Backend: Node.js + Express + PostgreSQL + Prisma
 - Frontend: Angular + Bootstrap
@@ -88,7 +88,5 @@ https://github.com/abigail20004/nom-app-repo.git
 
 ## Desarrolladora
 
-**Kimberly Abigail García Trujillo**  
-Prueba técnica realizada para Cofiño Stahl – Julio 2025
 
 
